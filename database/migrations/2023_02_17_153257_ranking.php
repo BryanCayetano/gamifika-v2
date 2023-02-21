@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->primary('ranking_name');
-            $table->foreign('nick')->references('nick')->on('users');
+            $table->foreign('nick')->references('nick')->on('user');
         });
     }
 

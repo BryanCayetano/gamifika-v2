@@ -22,6 +22,7 @@ return new class extends Migration
             //$table->rememberToken();
             $table->string('school')->nullable();
             $table->date('date')->nullable();
+            $table->string('rol');
             //$table->timestamps();
         });
     }

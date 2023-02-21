@@ -29,6 +29,13 @@ class UserController extends Controller
         $user->lastname = $request->lastname;
         $user->school = $request->school;
         $user->date = $request->date;
+        
+        if (isset($user->school)) {
+            $user->rol = "teacher";
+        } else {
+            $user->rol = "student";
+        }
+        echo $user;
         $user->save();
 
         return response()->json([
@@ -36,14 +43,16 @@ class UserController extends Controller
             "msg" => "Registro de usuario exitoso",
         ]);
     }
-
+    
     public function login(Request $request)
     {
         $request->validate([
             "email" => "required|email",
             "password" => "required"
         ]);
+
         $user = User::where("email", "=", $request->email)->first();
+
         if (isset($user->id)) {
             if (Hash::check($request->password, $user->password)) {
                 //creamos el token
@@ -67,6 +76,9 @@ class UserController extends Controller
             ], 404);
         }
     }
+
+    
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
