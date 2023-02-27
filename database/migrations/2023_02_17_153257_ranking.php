@@ -10,13 +10,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ranking', function (Blueprint $table) {
-            $table->string('ranking_name');
-            $table->string('nick');
-            $table->integer('points');
-            $table->timestamps();
+            $table->id('ranking_id');
+            $table->string('ranking_name'); 
+            $table->string('owner'); 
+            
+            $table->foreign('owner')->references('nick')->on('user');
 
-            $table->primary('ranking_name');
-            $table->foreign('nick')->references('nick')->on('user');
+            //$table->timestamps();
         });
     }
 

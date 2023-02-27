@@ -4,7 +4,7 @@ use App\Http\Controllers\RankingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\Ranking_UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes

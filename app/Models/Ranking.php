@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Ranking extends Model
 {
     use HasFactory;
+
+    public $table = "ranking";
+
+    
 }

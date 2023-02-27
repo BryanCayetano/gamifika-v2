@@ -19,22 +19,45 @@ class RankingController extends Controller
     public function create(Request $request)
     {
         $user = $request->user();
-        return $user;
-    }
-    public function delete()
-    {
-    }
+        
+        if (isset($user->rol)=="profesor") {
+            
+            $request->validate([
+                'ranking_name' => 'required | unique:ranking',
+            ]);
+            
+            $ranking = new Ranking();
+            $ranking->ranking_name=$request->ranking_name;
+            $ranking->owner=$user->nick;
+            $ranking->save();
 
-    public function insert()
-    {
+            return response()->json([
+                "status" => 1,
+                "msg" => "¡Ranking creado con éxito!",
+            ]);
+
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Han habido daddy issues",
+            ]);
+        }
+        
     }
-    public function kickoff()
+    public function delete(Request $request, $ranking_id)
     {
-    }
-    public function insert_points()
-    {
-    }
-    public function show_students()
-    {
+        $user = $request->user();
+        
+        if (isset($user->rol)=="profesor") {
+            
+            $ranking = Ranking::find($ranking_id);
+            $ranking->delete();
+
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Han habido daddy issues",
+            ]);
+        } 
     }
 }

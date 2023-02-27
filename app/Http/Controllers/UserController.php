@@ -29,13 +29,13 @@ class UserController extends Controller
         $user->lastname = $request->lastname;
         $user->school = $request->school;
         $user->date = $request->date;
-        
+
         if (isset($user->school)) {
             $user->rol = "teacher";
         } else {
             $user->rol = "student";
         }
-        echo $user;
+
         $user->save();
 
         return response()->json([
@@ -43,7 +43,7 @@ class UserController extends Controller
             "msg" => "Registro de usuario exitoso",
         ]);
     }
-    
+
     public function login(Request $request)
     {
         $request->validate([
@@ -76,8 +76,6 @@ class UserController extends Controller
             ], 404);
         }
     }
-
-    
 
     public function logout(Request $request)
     {
